@@ -1,0 +1,32 @@
+{
+  "name": "pince",
+  "version": "0.0.1",
+  "description": "An ambitious test package for UI test.",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FrankWang117/PinCe.git"
+  },
+  "keywords": [
+    "UI test",
+    "test"
+  ],
+  "author": "FrankWang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FrankWang117/PinCe/issues"
+  },
+  "homepage": "https://github.com/FrankWang117/PinCe#readme",
+  "dependencies": {
+    "commander": "^10.0.1",
+    "figlet": "^1.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.2.3",
+    "typescript": "^5.0.4"
+  }
+}
