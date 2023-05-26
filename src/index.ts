@@ -1,4 +1,8 @@
-const { Command } = require("commander");
+#! /usr/bin/env node
+
+import { Command } from "commander";
+import fs from "fs";
+import { createTest } from "./templates";
 const figlet = require("figlet");
 
 const program = new Command();
@@ -10,27 +14,36 @@ program
   .version("0.0.1", "-v, --version")
   .description("An ambitious test package for UI test.")
   .requiredOption("-c, --config <source>", "config file path")
+  .option("-o, --output <path>", "set the path of the generated test file")
   .parse(process.argv);
 
 const options = program.opts();
 
-// function resolve(program) {
-//   // 没有匹配任何选项的参数会被放到数组 args 中
-//   const { copy, hashtag, slash, args } = program;
-//   if (!args.length) {
-//     console.log("Please input filename.");
-//     return;
-//   }
-//   if (copy === true) {
-//     console.log("You should copy at least one file.");
-//     return;
-//   }
-//   let type = "star";
-//   if (slash) type = "slash";
-//   if (hashtag) type = "hashtag";
-//   for (let i = 0; i < args.length; i++) {
-//     gen(args[i], copy, type);
-//   }
-// }
+async function listDirContents(filePath: string, outputPath: string) {
+  try {
+    const content = fs.readFileSync(filePath, "utf-8");
+    const contentObj = JSON.parse(content);
+    const urlConfigs = contentObj.urls;
 
-// resolve(program);
+    (urlConfigs as any[]).forEach((config, index) => {
+      const fileContent = createTest(config, index);
+      const buildOutputPath = `${outputPath}/pince-${index}.spec.ts`;
+      const dir = buildOutputPath.split(`pince-${index}.spec.ts`)[0];
+
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+      }
+      fs.writeFileSync(buildOutputPath, fileContent);
+    });
+  } catch (error) {
+    console.error("Error occurred while reading the directory!", error);
+  }
+}
+
+if (options.config) {
+  const filePath =
+    typeof options.config === "string" ? options.config : __dirname;
+  const outputPath =
+    typeof options.output === "string" ? options.output : `./tests/urls`;
+  listDirContents(filePath, outputPath);
+}

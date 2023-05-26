@@ -1,0 +1,18 @@
+{
+  "urls": [
+    {
+      "title": "test baidu page",
+      "url": "https://www.baidu.com",
+      "testConfig": {
+        "loadedFlag": "waitForUrl",
+        "waitForUrl": "https://www.baidu.com"
+      },
+      "pageSize": {
+        "width": 800,
+        "height": 1000
+      },
+      "selector": "#head",
+      "beforeTest": []
+    }
+  ]
+}

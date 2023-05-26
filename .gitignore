@@ -29,3 +29,9 @@
 .DS_Store
 Thumbs.db
 dist
+
+# TypeScript cache
+*.tsbuildinfo
+
+# test directive
+tests
