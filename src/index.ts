@@ -47,3 +47,10 @@ if (options.config) {
     typeof options.output === "string" ? options.output : `./tests/urls`;
   listDirContents(filePath, outputPath);
 }
+
+function showHelp() {
+  // 参数不对时，显示 help
+  if (!process.argv.slice(2).length) {
+    program.outputHelp();
+  }
+}

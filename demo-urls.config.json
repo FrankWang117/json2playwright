@@ -1,7 +1,7 @@
 {
   "urls": [
     {
-      "title": "test baidu page",
+      "title": "url-test",
       "url": "https://www.baidu.com",
       "testConfig": {
         "loadedFlag": "waitForUrl",
@@ -12,6 +12,20 @@
         "height": 1000
       },
       "selector": "#head",
+      "beforeTest": []
+    },
+    {
+      "title": "request-test",
+      "url": "https://www.baidu.com/s?wd=PingCode",
+      "testConfig": {
+        "loadedFlag": "waitForRequest",
+        "requests": ["https://hector.baidu.com/static/h.gi.*"]
+      },
+      "pageSize": {
+        "width": 800,
+        "height": 1000
+      },
+      "selector": "#wrapper > div.result-molecule.new-pmd",
       "beforeTest": []
     }
   ]

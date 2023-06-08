@@ -1,4 +1,4 @@
-export function createRequestTest(config: any, index: number) {
+export function createTestWaitForRequest(config: any, index: number) {
   // 按照模板生成新文件内容
   const fileContent = `
 import { expect, Page, test } from '@playwright/test';
@@ -6,24 +6,32 @@ import { expect, Page, test } from '@playwright/test';
 const urlTitle = '${config.title}';
 const TemplateIndex = ${index};
 const url = '${config.url}';
+const requests = ('${config.testConfig.requests}').split(",");
 
-// should remove only
-test.describe.serial.only(\`urls - \${urlTitle}\`, () => {
+test.describe.serial(\`urls - \${urlTitle}\`, () => {
     let page: Page;
 
     test.beforeAll(async ({ browser }) => {
         page = await browser.newPage();
         await page.goto(url);
-        await page.waitForURL(url);
+        // await page.waitForURL(url);
+        await Promise.all(
+            requests.map(request => {
+                const reg = new RegExp(request);
+                return page.waitForResponse(res => {
+                    return res.status() === 200 && reg.test(res.url());
+                });
+            })
+        );
     });
 
     test.afterAll(async () => {
         await page.close();
     });
 
-    test(\`ui looks good\`, async ({}) => {
+    test('ui looks good', async ({}) => {
         // output path
-        const path = \`./newest-snapshot-for-e2e/\${url}-\${TemplateIndex}.png\`;
+        const path = \`./newest-snapshot-for-e2e/\${urlTitle}-\${TemplateIndex}.png\`;
         // config.pageSize
         const fullPageSize = {
             width: ${config.pageSize.width},
@@ -37,7 +45,7 @@ test.describe.serial.only(\`urls - \${urlTitle}\`, () => {
         });
         // await page.setViewportSize(originalSize);
         const eleBuffer = fullPageScreenshot;
-        expect(eleBuffer).toMatchSnapshot(\`\${url}-\${TemplateIndex}.png\`);
+        expect(eleBuffer).toMatchSnapshot(\`\${urlTitle}-\${TemplateIndex}.png\`);
     });
 });
 `;
