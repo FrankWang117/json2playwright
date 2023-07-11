@@ -1,4 +1,5 @@
 {
+  "outputDir": "",
   "urls": [
     {
       "title": "url-test",
@@ -12,7 +13,8 @@
         "height": 1000
       },
       "selector": "#head",
-      "beforeTest": []
+      "beforeTest": [],
+      "skip": true
     },
     {
       "title": "request-test",

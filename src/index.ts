@@ -1,10 +1,11 @@
 #! /usr/bin/env node
 
 import { Command } from "commander";
-import fs from "fs";
-import { createTest } from "./templates";
-const figlet = require("figlet");
+import { jsonCreator } from "./creator/creator-file";
+import { parseConfig } from "./json-parse";
+import { logResult } from "./log-result";
 
+const figlet = require("figlet");
 const program = new Command();
 
 console.log(figlet.textSync("PinCe"));
@@ -19,33 +20,22 @@ program
 
 const options = program.opts();
 
-async function listDirContents(filePath: string, outputPath: string) {
+if (options.config) {
+  const configFilePath =
+    typeof options.config === "string" ? options.config : __dirname;
   try {
-    const content = fs.readFileSync(filePath, "utf-8");
-    const contentObj = JSON.parse(content);
-    const urlConfigs = contentObj.urls;
+    const allConfig = parseConfig(configFilePath, options);
+    const outputDir = allConfig.outputDir;
+    const logs: string[] = [];
 
-    (urlConfigs as any[]).forEach((config, index) => {
-      const fileContent = createTest(config, index);
-      const buildOutputPath = `${outputPath}/pince-${index}.spec.ts`;
-      const dir = buildOutputPath.split(`pince-${index}.spec.ts`)[0];
-
-      if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir, { recursive: true });
-      }
-      fs.writeFileSync(buildOutputPath, fileContent);
+    allConfig.urlConfigs.forEach((config, index) => {
+      const log = jsonCreator(config, { outputDir, index });
+      logs.push(log);
     });
+    logResult(logs);
   } catch (error) {
     console.error("Error occurred while reading the directory!", error);
   }
-}
-
-if (options.config) {
-  const filePath =
-    typeof options.config === "string" ? options.config : __dirname;
-  const outputPath =
-    typeof options.output === "string" ? options.output : `./tests/urls`;
-  listDirContents(filePath, outputPath);
 }
 
 function showHelp() {
