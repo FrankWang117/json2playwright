@@ -1,4 +1,9 @@
-export function createTestWaitForRequest(config: any, index: number) {
+import { FileConfigInfo } from "src/types";
+
+export function createTestWaitForRequest(
+  config: FileConfigInfo,
+  index: number
+) {
   // 按照模板生成新文件内容
   const fileContent = `
 import { expect, Page, test } from '@playwright/test';
@@ -6,7 +11,7 @@ import { expect, Page, test } from '@playwright/test';
 const urlTitle = '${config.title}';
 const TemplateIndex = ${index};
 const url = '${config.url}';
-const requests = ('${config.testConfig.requests}').split(",");
+const requests = ${JSON.stringify(config.testConfig.requests)};
 
 test.describe.serial(\`urls - \${urlTitle}\`, () => {
     let page: Page;
@@ -40,7 +45,9 @@ test.describe.serial(\`urls - \${urlTitle}\`, () => {
         // const originalSize = page.viewportSize();
         await page.setViewportSize(fullPageSize);
         // #head is config.selector
-        const fullPageScreenshot = await page.locator('${config.selector}').screenshot({
+        const fullPageScreenshot = await page.locator('${
+          config.selector
+        }').screenshot({
             path
         });
         // await page.setViewportSize(originalSize);

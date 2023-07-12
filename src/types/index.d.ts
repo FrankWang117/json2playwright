@@ -3,7 +3,8 @@ export interface FileConfigInfo {
   url: string;
   testConfig: {
     loadedFlag: "waitForUrl" | "waitForRequest";
-    waitForUrl: string;
+    waitForUrl?: string;
+    requests?: string[];
   };
   pageSize: {
     width: number;
