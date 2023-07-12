@@ -1,5 +1,5 @@
 {
-  "name": "pin-ce",
+  "name": "@<Github_username>/pince",
   "version": "0.0.1",
   "description": "An ambitious test package for UI test.",
   "main": "lib/index.js",
