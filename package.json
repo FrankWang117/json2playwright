@@ -1,5 +1,5 @@
 {
-  "name": "@FrankWang117/pince",
+  "name": "@frankwang117/pince",
   "version": "0.0.1",
   "description": "An ambitious test package for UI test.",
   "main": "lib/index.js",
