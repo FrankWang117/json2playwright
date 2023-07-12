@@ -34,4 +34,4 @@ dist
 *.tsbuildinfo
 
 # test directive
-tests
+demo/tests

@@ -1,22 +1,17 @@
 # PinCe
 
-An ambitious test package for UI test.
+通过 JSON 配置文件，快速生成 playwright 测试文件的工具。
 
-## use
+## 使用
 
-first step:
+> 本地项目需要有 playwright 基础的配置，能够通过 npx playwright test 运行测试。
 
-`npm run build`
+安装完成之后，使用 `pince -c ./tests/pince.config.json` 命令生成文件 (json 文件可以参考 [Demo Config](https://github.com/FrankWang117/PinCe/blob/main/demo/demo-urls.config.json))。
 
-second step:  
-`node lib/index.js -c demo-urls.config.json`
-demo-urls.config.json is the urls config
+命令执行完毕，在命令行中看到相应输出后，即可以在相关目录看到测试文件生成，使用 `npx playwright test --update-snapshots` 生成最新的快照图片。  
+然后使用 `npx playwright test` 运行测试。
 
-## 本地发版调试
-
-1. `npm run build`；
-2. `npm i -g .` 现在全局即可使用 `pince` 来执行命令；
-3. 在其他项目： `pince -c ./tests/pince.config.json`。
+如果想在此项目中测试文件的生成，拉取本项目后，运行 `npm run test` 即可在 `./demo` 目录中看到根据 `./demo/demo-urls.config.json` 文件生成的测试文件。复制到其他安装了 playwright 依赖的项目中去运行即可。
 
 ## 配置文件
 
@@ -30,6 +25,7 @@ demo-urls.config.json is the urls config
       "testConfig": {
         "loadedFlag": "waitForUrl", // 生用的文件所使用的模版类型， waitForUrl ｜ waitForRequest
         "waitForUrl": "https://www.baidu.com"   // 当是 waitForUrl 需要配置此项，和 url 相同，支持正则。
+        "requests": ["https://hector.baidu.com/static/h.gi.*"]  // 当是 waitForRequest 需要配置此项，页面会等待这些请求都返回后才获取快照。支持正则。
       },
       "pageSize": { // 页面大小，用于像素对比中的获取范围
         "width": 800,
