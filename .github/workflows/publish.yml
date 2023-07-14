@@ -1,6 +1,8 @@
 name: "publish package to npm"
 
-on: push
+on:
+  push:
+    branches: ["release"]
 
 jobs:
   publish:
@@ -13,6 +15,8 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org
+      - name: build
+        run: npm run build
       - name: publish
         run: npm publish --access=public
         env:
