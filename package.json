@@ -1,6 +1,6 @@
 {
   "name": "json2playwright",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "An ambitious test package for UI test.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
