@@ -1,15 +1,16 @@
 {
   "name": "quality-pince",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "An ambitious test package for UI test.",
-  "main": "lib/index.js",
-  "types": "src/types/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "build": "npx tsc",
+    "prepublish": "npm run build",
+    "build": "tsc",
     "test": "npm run build && node lib/index.js -c ./demo/demo-urls.config.json"
   },
   "bin": {
-    "pince": "./lib/index.js"
+    "pince": "./dist/index.js"
   },
   "repository": {
     "type": "git",

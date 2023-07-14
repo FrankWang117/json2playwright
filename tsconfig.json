@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "outDir": "./lib",
-    "rootDir": "src",
+    "outDir": "./dist",
+    "rootDir": "./src",
     "baseUrl": ".",
     "strict": true,
     "target": "ES2018",
@@ -14,5 +14,5 @@
     "moduleResolution": "node"
   },
   "include": ["src"],
-  "exclude": ["node_modules", "src/test", "lib"]
+  "exclude": ["node_modules", "demo", "dist"]
 }
