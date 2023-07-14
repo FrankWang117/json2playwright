@@ -1,4 +1,4 @@
-# PinCe
+# json2playwright
 
 通过 JSON 配置文件，快速生成 playwright 测试文件的工具。
 
@@ -6,7 +6,7 @@
 
 > 本地项目需要有 playwright 基础的配置，能够通过 npx playwright test 运行测试。
 
-安装完成之后，使用 `pince -c ./tests/pince.config.json` 命令生成文件 (json 文件可以参考 [Demo Config](https://github.com/FrankWang117/PinCe/blob/main/demo/demo-urls.config.json))。
+安装完成之后，使用 `pince -c ./tests/pince.config.json` 命令生成文件 (json 文件可以参考 [Demo Config](https://github.com/FrankWang117/json2playwright/blob/main/demo/demo-urls.config.json))。
 
 命令执行完毕，在命令行中看到相应输出后，即可以在相关目录看到测试文件生成，使用 `npx playwright test --update-snapshots` 生成最新的快照图片。  
 然后使用 `npx playwright test` 运行测试。

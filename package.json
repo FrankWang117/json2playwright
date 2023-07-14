@@ -1,20 +1,20 @@
 {
-  "name": "quality-pince",
-  "version": "0.0.2",
+  "name": "json2playwright",
+  "version": "0.0.1",
   "description": "An ambitious test package for UI test.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "prepublish": "npm run build",
     "build": "tsc",
-    "test": "npm run build && node lib/index.js -c ./demo/demo-urls.config.json"
+    "test": "npm run build && node dist/index.js -c ./demo/demo-urls.config.json"
   },
   "bin": {
     "pince": "./dist/index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/FrankWang117/PinCe.git"
+    "url": "git+https://github.com/FrankWang117/json2playwright.git"
   },
   "keywords": [
     "UI test",
@@ -23,9 +23,9 @@
   "author": "FrankWang",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/FrankWang117/PinCe/issues"
+    "url": "https://github.com/FrankWang117/json2playwright/issues"
   },
-  "homepage": "https://github.com/FrankWang117/PinCe#readme",
+  "homepage": "https://github.com/FrankWang117/json2playwright#readme",
   "dependencies": {
     "commander": "^10.0.1",
     "figlet": "^1.6.0"

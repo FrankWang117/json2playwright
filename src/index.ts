@@ -8,7 +8,7 @@ import { logResult } from "./log-result";
 const figlet = require("figlet");
 const program = new Command();
 
-console.log(figlet.textSync("PinCe"));
+console.log(figlet.textSync("json2playwright"));
 
 program
   // 版本信息
